@@ -1,0 +1,33 @@
+[run]
+branch = True
+source = repoduce_pytest_mock_issue_84
+omit =
+    */pyshared/*
+    */python?.?/*
+    */site-packages/nose/*
+    */test/*
+    */pygobject-3.20.1/*
+    */site-packages/*
+    repoduce_pytest_mock_issue_84/__main__.py
+    repoduce_pytest_mock_issue_84/scripts/*.py
+    repoduce_pytest_mock_issue_84/emitter.py
+    repoduce_pytest_mock_issue_84/receiver.py
+
+[report]
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+    # Don't complain about missing debug-only code:
+    def __repr__
+
+    # Don't complain if tests don't hit defensive assertion code:
+    raise AssertionError
+    raise NotImplementedError
+
+    # From old Scarlett repo
+    assert False
+    raise NotImplementedError
+    raise AssertionError
+    if __name__ == .__main__.:

@@ -8,7 +8,7 @@
 # from mock import Mock, patch
 
 
-from __future__ import with_statement, division, absolute_import
+# from __future__ import with_statement, division, absolute_import
 
 import os
 import sys
@@ -26,7 +26,7 @@ def check_pid(pid):
     else:
         return True
 
-class KungFuPanda(object):
+class Subprocess(object):
     """KungFuPanda object"""
 
     def __init__(self, command, name=None, fork=False, run_check_command=True):

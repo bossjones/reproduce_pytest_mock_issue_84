@@ -67,15 +67,6 @@ export NC
 export ORNG
 export BLUE
 
-# # verify that certain variables have been defined off the bat
-# check_defined = \
-#     $(foreach 1,$1,$(__check_defined))
-# __check_defined = \
-#     $(if $(value $1),, \
-#       $(error Undefined $1$(if $(value 2), ($(strip $2)))))
-
-# list_allowed_args := product
-
 help:
 	@printf "\033[1m$$ASCILOGO $$NC\n"
 	@printf "\033[21m\n\n"
@@ -93,9 +84,7 @@ bootstrap:
 	[ "$$VIRTUAL_ENV" != "" ]
 	rm -rf *.egg-info || true
 	pip install -r requirements.txt
-	pip install -r requirements_dev.txt
 	python setup.py install
-	pip install -e .[test]
 
 clean-build: ## remove build artifacts
 	rm -fr build/
@@ -114,7 +103,6 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .tox/
 	rm -f .coverage
 	rm -fr htmlcov/
-
 
 test:
 	py.test --pdb --showlocals -v -R : -k test_subprocess.py

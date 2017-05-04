@@ -50,7 +50,7 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS 2
 ENV PYTHON_PIP_VERSION 9.0.1
 ENV SHLVL 1
 ENV HOME /home/pi
-# ENV VIRT_ROOT /home/pi/.virtualenvs/repoduce_pytest_mock_issue_84
+ENV VIRT_ROOT /home/pi/.virtualenvs/repoduce_pytest_mock_issue_84
 ENV GITHUB_BRANCH master
 ENV CFLAGS -fPIC -O0 -ggdb -fno-inline -fno-omit-frame-pointer
 ENV SERVER_WORKER_PROCESSES 1

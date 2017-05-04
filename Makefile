@@ -105,3 +105,6 @@ clean-test: ## remove test and coverage artifacts
 
 test:
 	py.test --pdb --showlocals -v -R : -k test_subprocess.py
+
+test-with-pdb:
+	pytest -p no:timeout -k test_subprocess.py

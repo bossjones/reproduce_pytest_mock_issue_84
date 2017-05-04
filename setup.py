@@ -12,6 +12,15 @@ from setuptools import find_packages, setup
 from setuptools.command import install_lib
 from setuptools.command.test import test as TestCommand
 
+# Don't force people to install setuptools unless
+# we have to.
+try:
+    from setuptools import setup
+except ImportError:
+    from ez_setup import use_setuptools
+    use_setuptools()
+    from setuptools import setup
+
 from repoduce_pytest_mock_issue_84.const import (GITHUB_URL, PROJECT_AUTHOR,
                                                  PROJECT_CLASSIFIERS,
                                                  PROJECT_DESCRIPTION,
@@ -21,16 +30,6 @@ from repoduce_pytest_mock_issue_84.const import (GITHUB_URL, PROJECT_AUTHOR,
                                                  PROJECT_URL, __version__)
 
 pp = pprint.PrettyPrinter(indent=4)
-
-
-# Don't force people to install setuptools unless
-# we have to.
-try:
-    from setuptools import setup
-except ImportError:
-    from ez_setup import use_setuptools
-    use_setuptools()
-    from setuptools import setup
 
 
 HERE = os.path.abspath(os.path.dirname(__file__))

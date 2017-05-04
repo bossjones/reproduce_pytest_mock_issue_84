@@ -13,6 +13,7 @@ from _pytest.monkeypatch import MonkeyPatch
 
 
 import repoduce_pytest_mock_issue_84
+from repoduce_pytest_mock_issue_84 import subprocess
 
 import signal
 import builtins
@@ -36,6 +37,8 @@ class TestSubprocess(object):
 
     def test_check_pid_os_error(self, mocker):
         mocker.stopall()
+
+        # import pdb;pdb.set_trace()
         # monkeypatch.undo()
         # mock
         kill_mock = mocker.MagicMock(name=__name__ + "_kill_mock_OSError")

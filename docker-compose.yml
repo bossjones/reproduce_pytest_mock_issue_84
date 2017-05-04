@@ -20,7 +20,7 @@ services:
       - "/docker_entrypoint.sh"
       - "/bin/bash"
     volumes:
-      - ./:/home/pi/dev/bossjones-github/repoduce_pytest_mock_issue_84:rw
+      - ./:/home/pi/dev/bossjones-github/repoduce_pytest_mock_issue_84:ro
 
 
 # version: '2'

@@ -1,0 +1,16 @@
+gcc
+gfortran
+python2.7-dev
+libhdf5-serial-dev
+libboost-dev
+virtualenvwrapper
+libboost-python-dev
+uuid-dev
+libxml2-dev
+libxslt1-dev
+libjpeg-dev
+libtiff-dev
+libblas-dev
+liblapack-dev
+pkg-config
+locales

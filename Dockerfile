@@ -11,6 +11,12 @@ RUN sudo usermod -G staff pi
 # RUN locale-gen en_US.UTF-8 && \
 #     echo 'LANG="en_US.UTF-8"' > /etc/default/locale
 
+# need libssl-dev for pip install cryptography
+# need libpq-dev for pip install psycopg2
+# need git for pip installing files from github
+# need libfontconfig1 for phantomJS for frontend testing
+
+
 ENV DEBIAN_FRONTEND noninteractive
 ENV GOSS_VERSION v0.2.3
 # ENV VIRTUALENVWRAPPER_SCRIPT /usr/local/bin/virtualenvwrapper.sh
@@ -130,7 +136,7 @@ RUN set -x cd /home/pi/dev/bossjones-github/repoduce_pytest_mock_issue_84 \
        source /usr/share/virtualenvwrapper/virtualenvwrapper.sh; \
        mkvirtualenv --python=/usr/bin/python3 repoduce_pytest_mock_issue_84; \
        workon repoduce_pytest_mock_issue_84; \
-       pip install --no-cache-dir --upgrade pip; \
+       pip install --no-cache-dir --upgrade --force-reinstall pip setuptools; \
        pip install --no-cache-dir -r requirements.txt; \
        cd /home/pi/dev/bossjones-github/repoduce_pytest_mock_issue_84; \
        python3 setup.py install"; echo '[venv finished]'

@@ -8,7 +8,7 @@
 # from mock import Mock, patch
 
 
-# from __future__ import with_statement, division, absolute_import
+from __future__ import with_statement, division, absolute_import
 
 import os
 import sys
@@ -26,8 +26,14 @@ def check_pid(pid):
     else:
         return True
 
+
 class Subprocess(object):
     """KungFuPanda object"""
+
+    __gtype_name__ = 'blah'
+    __gsignals__ = {
+        'exited': (object(), None, (int, int))
+    }
 
     def __init__(self, command, name=None, fork=False, run_check_command=True):
         """Create instance of Subprocess."""
@@ -104,9 +110,9 @@ class Subprocess(object):
         """Run the process."""
 
         self.pid, \
-        self.stdin, \
-        self.stdout, \
-        self.stderr = self.spawn_command()
+            self.stdin, \
+            self.stdout, \
+            self.stderr = self.spawn_command()
 
         logger.debug("command: {}".format(self.command))
         logger.debug("stdin: {}".format(self.stdin))
@@ -161,19 +167,19 @@ class Subprocess(object):
             sys.exit(1)
 
 
-class Instructor(object):
+# class Instructor(object):
 
-    tribe = "know_it_all"
+#     tribe = "know_it_all"
 
-    def __init__(self, name):
-        self.name = name
-        self.message = None
+#     def __init__(self, name):
+#         self.name = name
+#         self.message = None
 
-    def message(self, message):
-        """message"""
-        self.message = "What up {}".format(message)
+#     def message(self, message):
+#         """message"""
+#         self.message = "What up {}".format(message)
 
-    @classmethod
-    def get_tribe(cls):
-        """get_tribe"""
-        return cls.tribe
+#     @classmethod
+#     def get_tribe(cls):
+#         """get_tribe"""
+#         return cls.tribe

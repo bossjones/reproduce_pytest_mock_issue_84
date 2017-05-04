@@ -2,11 +2,24 @@
 # -*- coding: utf-8 -*-
 
 import os
-import sys
 import platform
-import re
-import warnings
 import pprint
+import re
+import sys
+import warnings
+
+from setuptools import find_packages, setup
+from setuptools.command import install_lib
+from setuptools.command.test import test as TestCommand
+
+from repoduce_pytest_mock_issue_84.const import (GITHUB_URL, PROJECT_AUTHOR,
+                                                 PROJECT_CLASSIFIERS,
+                                                 PROJECT_DESCRIPTION,
+                                                 PROJECT_EMAIL,
+                                                 PROJECT_LICENSE,
+                                                 PROJECT_PACKAGE_NAME,
+                                                 PROJECT_URL, __version__)
+
 pp = pprint.PrettyPrinter(indent=4)
 
 
@@ -19,36 +32,46 @@ except ImportError:
     use_setuptools()
     from setuptools import setup
 
-from setuptools import setup
-from setuptools import find_packages
-from setuptools.command.test import test as TestCommand
-from setuptools.command import install_lib
+
+HERE = os.path.abspath(os.path.dirname(__file__))
+DOWNLOAD_URL = ('{}/archive/'
+                '{}.zip'.format(GITHUB_URL, __version__))
+
+# PACKAGES = find_packages(exclude=['tests', 'tests.*'])
+PACKAGE_NAME = PROJECT_PACKAGE_NAME
+
+print('Current Python Version, B: {}'.format(sys.version_info))
+
+with open('README.md') as readme_file:
+    readme = readme_file.read()
+
+with open('HISTORY.rst') as history_file:
+    history = history_file.read()
+
+static = {}
+
+for root, dirs, files in os.walk('static'):
+    for filename in files:
+        filepath = os.path.join(root, filename)
+
+        if root not in static:
+            static[root] = []
+
+        static[root].append(filepath)
+
+# Might use this later
+try:
+    here = os.path.abspath(os.path.dirname(__file__))
+except:
+    pass
+
+
+def read_requirements(filename):
+    content = open(os.path.join(here, filename)).read()
+    requirements = map(lambda r: r.strip(), content.splitlines())
+    return requirements
 
 # from distutils.core import setup
-
-# requirements = [
-#     'pytest==3.0.7',
-#     'pytest-benchmark[histogram]==3.1.0a2',
-#     'pytest-catchlog==1.2.2',
-#     'pytest-cov==2.4.0',
-#     'pytest-ipdb==0.1.dev2',
-#     'pytest-leaks==0.2.2',
-#     'pytest-mock==1.6.0',
-#     'pytest-rerunfailures==2.1.0',
-#     'pytest-sugar==0.8.0',
-#     'pytest-timeout==1.2.0',
-#     'python-dateutil==2.6.0',
-#     'python-dbusmock==0.16.7',
-#     'flake8==3.3.0',
-#     'flake8-docstrings==1.0.3',
-#     'coverage==4.3.4',
-#     'pylint==1.7.1',
-#     'coveralls==1.1',
-#     'ipython==6.0.0',
-#     'gnureadline==6.3.3',
-#     'mock==2.0.0',
-#     'mock-open==1.3.1'
-# ]
 
 requirements = [
     'pytest>=3.0',
@@ -76,6 +99,7 @@ requirements = [
 
 ]
 
+
 class PyTest(TestCommand):
     """Run pytest."""
 
@@ -96,18 +120,32 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 setup(
-    name='repoduce_pytest_mock_issue_84',
-    version='0.0.1',
-    description='Reproduces marathon issue #84',
-    author='Malcolm Jones',
-    author_email='bossjones@theblacktonystark.com',
-    url='https://github.com/pytest-dev/pytest-mock/issues/84',
+    name=PROJECT_PACKAGE_NAME,
+    version=__version__,
+    description=PROJECT_DESCRIPTION,
+    long_description=readme + '\n\n' + history,
+    author=PROJECT_AUTHOR,
+    author_email=PROJECT_EMAIL,
+    url=PROJECT_URL,
+    download_url=DOWNLOAD_URL,
+
+    # name='repoduce_pytest_mock_issue_84',
+    # version='0.0.1',
+    # description='Reproduces marathon issue #84',
+    # author='Malcolm Jones',
+    # author_email='bossjones@theblacktonystark.com',
+    # url='https://github.com/pytest-dev/pytest-mock/issues/84',
     packages=[
         'repoduce_pytest_mock_issue_84',
     ],
     package_dir={'repoduce_pytest_mock_issue_84':
                  'repoduce_pytest_mock_issue_84'},
+    include_package_data=True,
     install_requires=requirements,
+    license=PROJECT_LICENSE,
+    zip_safe=False,
+    keywords='repoduce_pytest_mock_issue_84',
+    classifiers=PROJECT_CLASSIFIERS,
     test_suite='tests',
     cmdclass={'test': PyTest}
 )

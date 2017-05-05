@@ -80,10 +80,11 @@ clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and 
 
 .PHONY: bootstrap
 bootstrap:
-	[ "$$VIRTUAL_ENV" != "" ]
-	rm -rf *.egg-info || true
-	pip install -r requirements.txt
-	python setup.py install
+	@workon repoduce_pytest_mock_issue_84
+	@rm -rf *.egg-info || true
+	@pip install -r requirements.txt
+	@python setup.py install
+	@printf "\033[1mReady for testing! $$NC\n"
 
 clean-build: ## remove build artifacts
 	rm -fr build/

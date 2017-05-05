@@ -5,9 +5,6 @@
 
 """repoduce_pytest_mock_issue_84. Fake subprocess module."""
 
-# from mock import Mock, patch
-
-
 from __future__ import with_statement, division, absolute_import
 
 import os
@@ -165,21 +162,3 @@ class Subprocess(object):
         except OSError as e:
             logger.error('Error forking process second time')
             sys.exit(1)
-
-
-# class Instructor(object):
-
-#     tribe = "know_it_all"
-
-#     def __init__(self, name):
-#         self.name = name
-#         self.message = None
-
-#     def message(self, message):
-#         """message"""
-#         self.message = "What up {}".format(message)
-
-#     @classmethod
-#     def get_tribe(cls):
-#         """get_tribe"""
-#         return cls.tribe

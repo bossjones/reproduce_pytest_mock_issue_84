@@ -36,7 +36,9 @@ class TestSubprocess(object):
     '''Units tests for Scarlett Subprocess, subclass of GObject.Gobject.'''
 
     def test_check_pid_os_error(self, mocker):
-        # mocker.stopall()
+        if os.environ.get('ENABLE_STOPALL'):
+            mocker.stopall()
+        
         kill_mock = mocker.MagicMock(name=__name__ + "_kill_mock_OSError")
         kill_mock.side_effect = OSError
 
@@ -70,11 +72,15 @@ class TestSubprocess(object):
         kill_mock.assert_called_once_with(123, 0)
         assert result is True
 
-        # mocker.stopall()
+        
+        if os.environ.get('ENABLE_STOPALL'):
+            mocker.stopall()
 
     # FIXME: This guy is causing the problem somehow!
     def test_subprocess_init(self, mocker):
-        # mocker.stopall()
+        
+        if os.environ.get('ENABLE_STOPALL'):
+            mocker.stopall()
 
         mock_check_command_type = mocker.MagicMock(
             name=__name__ + "_mock_check_command_type")
@@ -118,12 +124,16 @@ class TestSubprocess(object):
         mock_logging_debug.assert_any_call("pid: None")
         mock_fork.assert_not_called()
 
-        # mocker.stopall()
+        
+        if os.environ.get('ENABLE_STOPALL'):
+            mocker.stopall()
 
     # FIXME: This guy is causing problems too!
     def test_subprocess_map_type_to_command(self, mocker):
         """Using the mock.patch decorator (removes the need to import builtins)"""
-        # mocker.stopall()
+        
+        if os.environ.get('ENABLE_STOPALL'):
+            mocker.stopall()
 
         mock_logging_debug = mocker.MagicMock(
             name=__name__ + "_mock_logging_debug")
@@ -152,11 +162,15 @@ class TestSubprocess(object):
         # method was not added until version 3.6. This is arguably what Python3.4 should have done."
         # assert s_test.map_type_to_command.assert_called_once_with(test_command)
         spy.assert_called_once_with(test_command)
-        # mocker.stopall()
+        
+        if os.environ.get('ENABLE_STOPALL'):
+            mocker.stopall()
 
     def test_subprocess_check_command_type(self, mocker):
         """Using the mock.patch decorator (removes the need to import builtins)"""
-        # mocker.stopall()
+        
+        if os.environ.get('ENABLE_STOPALL'):
+            mocker.stopall()
 
         test_command = ["who", "-b"]
         test_name = 'test_who'
@@ -194,4 +208,6 @@ class TestSubprocess(object):
         assert str(
             excinfo.value) == "Executables and arguments must be str objects. types: <class 'int'>"
 
-        # mocker.stopall()
+        
+        if os.environ.get('ENABLE_STOPALL'):
+            mocker.stopall()

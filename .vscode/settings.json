@@ -12,7 +12,7 @@
         "**/.hg": true,
         "**/.DS_Store": true
 	},
-    "python.pythonPath": "/Users/malcolm/.virtualenvs/scarlett-os-venv2/bin/python3",
+    "python.pythonPath": "/Users/malcolm/.virtualenvs/repoduce_pytest_mock_issue_84",
     "python.formatting.provider": "autopep8",
     "python.linting.ignorePatterns": [
       ".vscode/*.py",

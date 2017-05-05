@@ -109,3 +109,9 @@ test:
 
 test-with-pdb:
 	pytest -p no:timeout -k test_subprocess.py
+
+docker-compose:
+	@docker-compose up --build
+
+docker-exec:
+	@docker exec -i -t reproducepytestmockissue84_pytest_1 bash
